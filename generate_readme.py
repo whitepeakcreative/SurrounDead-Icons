@@ -412,50 +412,21 @@ def fmt(stem):
     return ' '.join(words)
 
 
-CELL_WIDTH = f"{100 // COLS}%"
-CELL_HEIGHT = "110"  # fixed height so all cells match even with 1-line vs 2-line names
+def gfm_cell(path_rel, name):
+    return (f'<a href="{path_rel}">'
+            f'<img src="{path_rel}" width="80" title="{name}">'
+            f'</a><br><small>{name}</small>')
 
-def cell(path_rel, name):
-    return (f'<td align="center" valign="top" width="{CELL_WIDTH}" height="{CELL_HEIGHT}">'
-            f'<a href="{path_rel}">'
-            f'<img src="{path_rel}" width="80" title="{name}"><br>'
-            f'<small>{name}</small>'
-            f'</a></td>')
-
-def empty_cell():
-    return f'<td width="{CELL_WIDTH}" height="{CELL_HEIGHT}">&nbsp;</td>'
-
-def icon_rows(items):
-    rows = []
+def gfm_table(items):
+    header = '| ' + ' | '.join([' '] * COLS) + ' |'
+    sep = '| ' + ' | '.join([':---:'] * COLS) + ' |'
+    rows = [header, sep]
     for i in range(0, len(items), COLS):
         chunk = items[i:i + COLS]
-        cells = [cell(p, n) for p, n in chunk]
-        cells += [empty_cell()] * (COLS - len(chunk))
-        rows.append('<tr>' + ''.join(cells) + '</tr>')
-    return rows
-
-def sub_header_row(title, count):
-    return (f'<tr><td colspan="{COLS}" align="left" height="36">'
-            f'<strong>{title}</strong>&nbsp;<sup>{count}</sup>'
-            f'</td></tr>')
-
-def table_multi(subs):
-    """All subcategories in ONE table — colspan rows lock the table to full width."""
-    rows = []
-    for i, (title, items) in enumerate(subs):
-        if i > 0:
-            rows.append(f'<tr><td colspan="{COLS}" height="6"></td></tr>')
-        if title:
-            rows.append(sub_header_row(title, len(items)))
-        else:
-            # Invisible colspan row still forces the browser to render at full width
-            rows.append(f'<tr><td colspan="{COLS}" height="1"></td></tr>')
-        rows.extend(icon_rows(items))
-    return '<table width="100%">\n' + '\n'.join(rows) + '\n</table>'
-
-def table(items):
-    """Single-subcategory: delegate to table_multi so it gets the same colspan structure."""
-    return table_multi([("", items)])
+        cells = [gfm_cell(p, n) for p, n in chunk]
+        cells += ['&nbsp;'] * (COLS - len(chunk))
+        rows.append('| ' + ' | '.join(cells) + ' |')
+    return '\n'.join(rows)
 
 
 def load(cat, sub):
@@ -494,13 +465,16 @@ def build_body():
         lines = [f'## {cat_name} &nbsp;<sup>{cat_total} icons</sup>', '']
         if len(subs) == 1:
             _, _, items = loaded[0]
-            lines.append(table(items))
+            lines.append(gfm_table(items))
         else:
-            subs_data = [
-                (sub.replace('_', ' ').title(), items)
-                for _, sub, items in loaded if items
-            ]
-            lines.append(table_multi(subs_data))
+            for _, sub, items in loaded:
+                if not items:
+                    continue
+                sub_title = sub.replace('_', ' ').title()
+                lines.append(f'### {sub_title} &nbsp;<sup>{len(items)}</sup>')
+                lines.append('')
+                lines.append(gfm_table(items))
+                lines.append('')
         parts.append('\n'.join(lines))
     print(f'Total icons: {grand_total}')
     return '\n\n---\n\n'.join(parts)
