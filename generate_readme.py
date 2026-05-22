@@ -439,19 +439,23 @@ def sub_header_row(title, count):
             f'<strong>{title}</strong>&nbsp;<sup>{count}</sup>'
             f'</td></tr>')
 
-def table(items):
-    """Single-subcategory: just icon rows, no header."""
-    return '<table width="100%">\n' + '\n'.join(icon_rows(items)) + '\n</table>'
-
 def table_multi(subs):
-    """Multiple subcategories in ONE table — guarantees identical column widths throughout."""
+    """All subcategories in ONE table — colspan rows lock the table to full width."""
     rows = []
     for i, (title, items) in enumerate(subs):
         if i > 0:
             rows.append(f'<tr><td colspan="{COLS}" height="6"></td></tr>')
-        rows.append(sub_header_row(title, len(items)))
+        if title:
+            rows.append(sub_header_row(title, len(items)))
+        else:
+            # Invisible colspan row still forces the browser to render at full width
+            rows.append(f'<tr><td colspan="{COLS}" height="1"></td></tr>')
         rows.extend(icon_rows(items))
     return '<table width="100%">\n' + '\n'.join(rows) + '\n</table>'
+
+def table(items):
+    """Single-subcategory: delegate to table_multi so it gets the same colspan structure."""
+    return table_multi([("", items)])
 
 
 def load(cat, sub):
