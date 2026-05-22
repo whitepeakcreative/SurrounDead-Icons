@@ -6,8 +6,13 @@ High-quality 3D-rendered icons for every item in [SurrounDead](https://store.ste
 
 Intended for use in wikis, community tools, mod menus, and fan projects.
 
+> Click any icon to open the full 1920×1080 version.
+
 ---
 
+**Jump to:** [Ammo](#ammo) &nbsp;·&nbsp; [Attachments](#attachments) &nbsp;·&nbsp; [Equipment](#equipment) &nbsp;·&nbsp; [Food](#food) &nbsp;·&nbsp; [Keycards](#keycards) &nbsp;·&nbsp; [Legendary](#legendary) &nbsp;·&nbsp; [Medical](#medical) &nbsp;·&nbsp; [Weapons](#weapons)
+
+<a id="ammo"></a>
 ## Ammo &nbsp;<sup>12 icons</sup>
 
 |   |   |   |   |   |
@@ -18,6 +23,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="attachments"></a>
 ## Attachments &nbsp;<sup>52 icons</sup>
 
 ### Grips &nbsp;<sup>3</sup>
@@ -66,6 +72,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="equipment"></a>
 ## Equipment &nbsp;<sup>474 icons</sup>
 
 ### Accessories &nbsp;<sup>9</sup>
@@ -258,6 +265,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="food"></a>
 ## Food &nbsp;<sup>60 icons</sup>
 
 ### Containers &nbsp;<sup>3</sup>
@@ -308,6 +316,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="keycards"></a>
 ## Keycards &nbsp;<sup>5 icons</sup>
 
 |   |   |   |   |   |
@@ -316,6 +325,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="legendary"></a>
 ## Legendary &nbsp;<sup>12 icons</sup>
 
 |   |   |   |   |   |
@@ -326,6 +336,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="medical"></a>
 ## Medical &nbsp;<sup>9 icons</sup>
 
 |   |   |   |   |   |
@@ -335,6 +346,7 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 ---
 
+<a id="weapons"></a>
 ## Weapons &nbsp;<sup>55 icons</sup>
 
 ### Lmg &nbsp;<sup>2</sup>
