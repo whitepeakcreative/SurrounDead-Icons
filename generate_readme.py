@@ -423,16 +423,34 @@ def cell(path_rel, name):
             f'</a></td>')
 
 def empty_cell():
-    return f'<td width="{CELL_WIDTH}" height="{CELL_HEIGHT}"></td>'
+    return f'<td width="{CELL_WIDTH}" height="{CELL_HEIGHT}">&nbsp;</td>'
 
-def table(items):
+def icon_rows(items):
     rows = []
     for i in range(0, len(items), COLS):
         chunk = items[i:i + COLS]
         cells = [cell(p, n) for p, n in chunk]
-        # Pad partial rows so every row has COLS cells — keeps the grid uniform
         cells += [empty_cell()] * (COLS - len(chunk))
         rows.append('<tr>' + ''.join(cells) + '</tr>')
+    return rows
+
+def sub_header_row(title, count):
+    return (f'<tr><td colspan="{COLS}" align="left" height="36">'
+            f'<strong>{title}</strong>&nbsp;<sup>{count}</sup>'
+            f'</td></tr>')
+
+def table(items):
+    """Single-subcategory: just icon rows, no header."""
+    return '<table width="100%">\n' + '\n'.join(icon_rows(items)) + '\n</table>'
+
+def table_multi(subs):
+    """Multiple subcategories in ONE table — guarantees identical column widths throughout."""
+    rows = []
+    for i, (title, items) in enumerate(subs):
+        if i > 0:
+            rows.append(f'<tr><td colspan="{COLS}" height="6"></td></tr>')
+        rows.append(sub_header_row(title, len(items)))
+        rows.extend(icon_rows(items))
     return '<table width="100%">\n' + '\n'.join(rows) + '\n</table>'
 
 
@@ -474,12 +492,11 @@ def build_body():
             _, _, items = loaded[0]
             lines.append(table(items))
         else:
-            for _, sub, items in loaded:
-                if not items:
-                    continue
-                sub_title = sub.replace('_', ' ').title()
-                lines += [f'### {sub_title} &nbsp;<sup>{len(items)}</sup>', '',
-                          table(items), '']
+            subs_data = [
+                (sub.replace('_', ' ').title(), items)
+                for _, sub, items in loaded if items
+            ]
+            lines.append(table_multi(subs_data))
         parts.append('\n'.join(lines))
     print(f'Total icons: {grand_total}')
     return '\n\n---\n\n'.join(parts)
