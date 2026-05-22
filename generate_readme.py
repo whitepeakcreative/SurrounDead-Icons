@@ -412,21 +412,27 @@ def fmt(stem):
     return ' '.join(words)
 
 
-CELL_WIDTH = f"{100 // COLS}%"  # equal-width columns regardless of row fullness
+CELL_WIDTH = f"{100 // COLS}%"
+CELL_HEIGHT = "110"  # fixed height so all cells match even with 1-line vs 2-line names
 
 def cell(path_rel, name):
-    return (f'<td align="center" width="{CELL_WIDTH}">'
+    return (f'<td align="center" valign="top" width="{CELL_WIDTH}" height="{CELL_HEIGHT}">'
             f'<a href="{path_rel}">'
             f'<img src="{path_rel}" width="80" title="{name}"><br>'
             f'<small>{name}</small>'
             f'</a></td>')
 
+def empty_cell():
+    return f'<td width="{CELL_WIDTH}" height="{CELL_HEIGHT}"></td>'
 
 def table(items):
     rows = []
     for i in range(0, len(items), COLS):
         chunk = items[i:i + COLS]
-        rows.append('<tr>' + ''.join(cell(p, n) for p, n in chunk) + '</tr>')
+        cells = [cell(p, n) for p, n in chunk]
+        # Pad partial rows so every row has COLS cells — keeps the grid uniform
+        cells += [empty_cell()] * (COLS - len(chunk))
+        rows.append('<tr>' + ''.join(cells) + '</tr>')
     return '<table width="100%">\n' + '\n'.join(rows) + '\n</table>'
 
 
