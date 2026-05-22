@@ -1,3 +1,7 @@
+
+
+
+
 #!/usr/bin/env python3
 """Generate README.md with all 679 icons in linked HTML tables."""
 
@@ -409,7 +413,7 @@ def fmt(stem):
 
 
 def cell(path_rel, name):
-    return (f'<td align="center" width="110">'
+    return (f'<td align="center">'
             f'<a href="{path_rel}">'
             f'<img src="{path_rel}" width="80" title="{name}"><br>'
             f'<sub>{name}</sub>'
@@ -421,7 +425,7 @@ def table(items):
     for i in range(0, len(items), COLS):
         chunk = items[i:i + COLS]
         rows.append('<tr>' + ''.join(cell(p, n) for p, n in chunk) + '</tr>')
-    return '<table>\n' + '\n'.join(rows) + '\n</table>'
+    return '<table width="100%">\n' + '\n'.join(rows) + '\n</table>'
 
 
 def load(cat, sub):
