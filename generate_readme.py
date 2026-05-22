@@ -10,7 +10,7 @@ import re
 
 ROOT = Path(__file__).parent
 ICONS = ROOT / "icons"
-COLS = 6
+COLS = 5
 
 # ── Known display names ────────────────────────────────────────────────────────
 KNOWN = {
@@ -418,7 +418,7 @@ def cell(path_rel, name):
     return (f'<td align="center" width="{CELL_WIDTH}">'
             f'<a href="{path_rel}">'
             f'<img src="{path_rel}" width="80" title="{name}"><br>'
-            f'<sub>{name}</sub>'
+            f'<small>{name}</small>'
             f'</a></td>')
 
 
