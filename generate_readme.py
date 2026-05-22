@@ -412,8 +412,10 @@ def fmt(stem):
     return ' '.join(words)
 
 
+CELL_WIDTH = f"{100 // COLS}%"  # equal-width columns regardless of row fullness
+
 def cell(path_rel, name):
-    return (f'<td align="center">'
+    return (f'<td align="center" width="{CELL_WIDTH}">'
             f'<a href="{path_rel}">'
             f'<img src="{path_rel}" width="80" title="{name}"><br>'
             f'<sub>{name}</sub>'
