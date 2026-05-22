@@ -1,5 +1,7 @@
 # SurrounDead Item Icons
 
+![SurrounDead Item Icons](thumbnail.png)
+
 High-quality 3D-rendered icons for every item in [SurrounDead](https://store.steampowered.com/app/1609400/SurrounDead/). All 679 icons were rendered in Blender 5.1 using the game's original meshes and textures, exported via FModel.
 
 Transparent PNG background. Intended for use in wikis, community tools, mod menus, and fan projects.
