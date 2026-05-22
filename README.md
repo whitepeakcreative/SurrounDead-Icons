@@ -12,6 +12,8 @@ Intended for use in wikis, community tools, mod menus, and fan projects.
 
 **Jump to:** [Ammo](#ammo) &nbsp;·&nbsp; [Attachments](#attachments) &nbsp;·&nbsp; [Equipment](#equipment) &nbsp;·&nbsp; [Food](#food) &nbsp;·&nbsp; [Keycards](#keycards) &nbsp;·&nbsp; [Legendary](#legendary) &nbsp;·&nbsp; [Medical](#medical) &nbsp;·&nbsp; [Weapons](#weapons)
 
+> **Tip:** Press `Ctrl+F` and type an item name to find it instantly.
+
 <a id="ammo"></a>
 ## Ammo &nbsp;<sup>12 icons</sup>
 
